@@ -1,24 +1,40 @@
 #!/usr/bin/python3
 from sys import stdin
+from random import randint
 import time
 start_time = time.time()
 
 
-def sort_list(A):
-    # NOTICE: The sorted list must be returned.
-    less,equal,greater = [],[],[]
-    if len(A) > 1:
-        pivot = A[0]
-        for num in A:
-            if num > pivot:
-                greater.append(num)
-            elif num == pivot:
-                equal.append(num)
-            else:
-                less.append(num)
-        return sort_list(less)+equal+sort_list(greater)
-    else:
-        return A
+def quicksort(alist, start, end):
+    #This function calls the partition and then recurse itself using the index returned by partition
+    if start < end:
+        pIndex = partition(alist, start, end)
+        quicksort(alist, start, pIndex - 1)
+        quicksort(alist, pIndex + 1, end)
+
+    return alist
+
+
+def partition(alist, start, end):
+    #This function will devide the list in two halves wrt pivot
+    #This will return the index of pivot after deviding
+    pivot = randint(start, end)
+    temp = alist[end]
+    alist[end] = alist[pivot]
+    alist[pivot] = temp
+    pIndex = start
+
+    for i in range(start, end):
+        if alist[i] <= alist[end]:
+            temp = alist[i]
+            alist[i] = alist[pIndex]
+            alist[pIndex] = temp
+            pIndex += 1
+    temp1 = alist[end]
+    alist[end] = alist[pIndex]
+    alist[pIndex] = temp1
+
+    return pIndex
 
 
 
@@ -79,16 +95,15 @@ def main():
     input_list = []
     for x in stdin.readline().split():
         input_list.append(int(x))
-    sorted_list = sort_list(input_list)
+    sorted_list = quicksort(input_list,0,len(input_list)-1)
     for line in stdin:
         word = line.split()
         minimum = int(word[0])
         maximum = int(word[1])
         result = find(sorted_list, minimum, maximum)
-        #print(str(result[0]) + " " + str(result[1]))
+        print(str(result[0]) + " " + str(result[1]))
 
 
 
 if __name__ == "__main__":
     main()
-    print("--- %s seconds ---" % (time.time() - start_time))
