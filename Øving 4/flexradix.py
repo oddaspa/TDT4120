@@ -6,46 +6,57 @@ from random import randint, choice
 from operator import itemgetter
 from collections import defaultdict
 
-import string
-d = dict.fromkeys(string.ascii_lowercase, 0)
+
 
 def flexradix(A, d):
-    for word in A:
-        place_word_in_dict(word)
-
-
-
-    return True
-
     # Du må mest sannsynlig lage egne hjelpefunksjoner for denne funksjonen for å løse oppgaven.
     # Funksjonen skal returnere listen A sortert.
     # SKRIV DIN KODE HER
-def place_word_in_dict(word):
-    d[word[0]].append(word)
-def get_character_value(word, index):
-    return ord(word[index])
 
-# helper to find the lowest(first) word
-def string_compare(word1, word2):
-    if word1 < word2:
-        length = len(word1)
-        i = True
-    elif word2 < word1:
-        length = len(word2)
-        i = False
-    else:
-        length = len(word1)
-    for x in range(length):
-        if word1[x] < word1[x]:
-            return word1
-        elif word2[x] < word2[x]:
-            return word2
-    # if word1 is shortest return it
-    if i:
-        return word1
-    return word2
+    # creates a new list of the words sorted after length
+    list3 = sort_length(A)
+    return counting_sort(list3, d)
 
 
+
+def counting_sort(A, d):
+    # creates empty list of length of the longest word
+    list = [0]*d
+    # appends the length of a word to the list
+    for word in A:
+        list[len(word)-1] = list[len(word)-1]+1
+    # appends the number of words
+    for i in range(d-1, 0, -1):
+        list[i-1] = list[i-1] + list[i]
+
+    for i in range (d, -1, -1):
+        F = A[len(A)-list[i-1]:]
+        B = [0] * len(F)
+        C = [0] * 26
+        for j in range(len(F)):
+
+            index = ord(F[j][i-1])-97
+
+            C[index] = C[index] + 1
+        for j in range(1, 26):
+            C[j] = C[j] + C[j-1]
+        for j in range(len(F)-1, -1, -1):
+
+            index = ord(F[j][i-1]) -97
+            B[C[index]-1] = F[j]
+            C[index] = C[index] - 1
+
+        A[len(A) - list[i - 1]:] = B
+    return A
+
+def sort_length(A):
+    for i in range(len(A)):
+        for j in range(i + 1, len(A)):
+            if len(A[i]) > len(A[j]):
+                temp = A[i]
+                A[i] = A[j]
+                A[j] = temp
+    return A
 
 def main():
     d = int(stdin.readline())
