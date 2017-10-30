@@ -1,36 +1,37 @@
 from sys import stdin, stderr
-class Node():
-    def __init__(self, prob, neighbours ):
-        self.prob = prob
-        self.neighbours = neighbours
-
 def best_path(nm, prob):
-    path_finished = False
-    current_node = nm[0]
-    visited_nodes = [0]
-    i = 0
-    nodes = []
-    path_list = len(nm) * [-1]
+    path_list = len(nm)*[-1]
     path_list[0] = prob[0]
-    while not path_finished:
-        max_weight = -1
-        for x in range(len(current_node)-1):
-            index_of_neighbour = x
-            print(visited_nodes)
-            if prob[index_of_neighbour] > path_list[index_of_neighbour] and not index_of_neighbour in visited_nodes:
-                path_list[index_of_neighbour] = prob[index_of_neighbour]*prob[nm.index(current_node)]
-                current_node = nm[index_of_neighbour]
-                next_index = index_of_neighbour
-        for weight in path_list:
-            if weight > max_weight and not path_list.index(weight) in visited_nodes:
-                max_weight = weight
-
-        next_node = nm[path_list.index(max_weight)]
-        visited_nodes.append(next_index)
-        print(path_list)
+    visited_nodes = [0]
+    current_node = nm[0]
+    key = 0
+    output = "0"
+    while len(visited_nodes) != len(nm):
+        max_node = False
+        for x in range(len(current_node)):
+            if current_node[x]:
+                if x not in visited_nodes:
+                    if path_list[nm.index(current_node)]*prob[x] > path_list[x] or path_list[x] == -1:
+                        path_list[x] = path_list[key]*prob[x]
+        max_prob = -1
         if len(visited_nodes) == len(nm):
-            path_finished = True
-    print(path_list)
+            return visited_nodes
+        while not max_node:
+            i = 0
+            for y in path_list:
+                #print("here is y: " + str(y) + " and here is max: " + str(max_prob))
+                if not i in visited_nodes:
+                    if y > max_prob:
+                        max_prob = y
+                        key = i
+                i += 1
+            max_node = True
+
+        current_node = nm[key]
+        visited_nodes.append(key)
+        output += "-" + str(key)
+        if (len(nm)-1) in visited_nodes:
+            return output
     return True
 
 n = int(stdin.readline())
@@ -42,4 +43,4 @@ for line in stdin:
     for neighbour in neighbours:
         neighbour_row[neighbour] = 1
     neighbour_matrix.append(neighbour_row)
-print (best_path(neighbour_matrix, probabilities))
+print(best_path(neighbour_matrix, probabilities))

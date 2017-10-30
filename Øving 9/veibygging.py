@@ -8,7 +8,7 @@ def mst(nm):
     if len(nm) == 1:
         smallest_edges = nm
 
-    # (1) Inintialize first step
+    # Initialize first step
     # array to keep track of weights of the edges we choose to keep
     smallest_edges = []
 
@@ -48,5 +48,4 @@ for line in lines:
         weight = int(data[1])
         neighbour_matrix[node].append((neighbour,weight))
     node += 1
-print(neighbour_matrix)
 print(mst(neighbour_matrix))
