@@ -8,9 +8,9 @@ import time
 def main():
     i = 0
     j = 0
-    stdin = open("testinput.txt")
+    test_file = open("input.txt")
     input_list = []
-    for x in stdin.readline().split():
+    for x in test_file.readline().split():
         input_list.append(int(x))
 
     start_time1 = time.time()

@@ -87,7 +87,7 @@ def main():
         minimum = int(word[0])
         maximum = int(word[1])
         result = find(sorted_list, minimum, maximum)
-        # print(str(result[0]) + " " + str(result[1]))
+        print(str(result[0]) + " " + str(result[1]))
 
 
 if __name__ == "__main__":

@@ -2,6 +2,7 @@
 
 from sys import stdin
 
+
 # uses indexes as the parents and then counts how many step to the root (-1)
 def tweak(ratatosk_node):
     current_node = ratatosk_node

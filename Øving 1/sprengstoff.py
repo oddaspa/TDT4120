@@ -26,7 +26,7 @@ def main():
     for line in stdin:
         penultimate = last
         last = Record(int(line))
-        if first is None:
+        if first is not None:
             first = last
         else:
             penultimate.next = last

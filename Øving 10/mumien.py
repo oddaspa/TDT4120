@@ -1,4 +1,4 @@
-from sys import stdin, stderr
+from sys import stdin
 
 
 def best_path(nm, prob):
@@ -24,8 +24,7 @@ def best_path(nm, prob):
         while not max_node:
             i = 0
             for y in path_list:
-                # print("here is y: " + str(y) + " and here is max: " + str(max_prob))
-                if not i in visited_nodes:
+                if i not in visited_nodes:
                     if y > max_prob:
                         max_prob = y
                         key = i

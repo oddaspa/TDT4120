@@ -27,7 +27,7 @@ def mst(nm):
             for neighbour_node, edge_weight in nm[nodes]:
                 # go through all edges in a visited node
                 #  if this edge is smaller that the ones we have checked out and the destination is not in visited
-                if edge_weight < min_weight and not neighbour_node in visited_list:
+                if edge_weight < min_weight and neighbour_node not in visited_list:
                     min_weight = edge_weight
                     next_node = neighbour_node
             # we append the min node with the corresponding min edge

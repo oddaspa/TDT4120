@@ -1,11 +1,10 @@
 #!/usr/bin/python3
 from sys import stdin
 
-# import time
-# start_time = time.time()
+
 # Alle kall jeg gjør mer enn 1 gang skal få variabel.
+# NOTICE: Random quicksort would be better.
 def sort_list(A):
-    # NOTICE: Random quicksort would be better.
     less, equal, greater = [], [], []
     if len(A) > 1:
         pivot = A[0]
@@ -110,4 +109,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    # print("--- %s seconds ---" % (time.time() - start_time))
