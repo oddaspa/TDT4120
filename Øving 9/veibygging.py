@@ -1,7 +1,9 @@
 from sys import stdin
-#stdin = open("input.txt")
+
+# stdin = open("input.txt")
 
 Inf = float(1e3000)
+
 
 def mst(nm):
     # edge case
@@ -21,10 +23,10 @@ def mst(nm):
         # lets find the smallest edge
         for nodes in visited_list:
 
-        # we scan through all nodes that we already visited
-            for neighbour_node,edge_weight in nm[nodes]:
+            # we scan through all nodes that we already visited
+            for neighbour_node, edge_weight in nm[nodes]:
                 # go through all edges in a visited node
-                    #  if this edge is smaller that the ones we have checked out and the destination is not in visited
+                #  if this edge is smaller that the ones we have checked out and the destination is not in visited
                 if edge_weight < min_weight and not neighbour_node in visited_list:
                     min_weight = edge_weight
                     next_node = neighbour_node
@@ -43,9 +45,9 @@ neighbour_matrix = [[] for x in range(n)]
 node = 0
 for line in lines:
     for k in line.split():
-        data = k.split(':')
+        data = k.split(":")
         neighbour = int(data[0])
         weight = int(data[1])
-        neighbour_matrix[node].append((neighbour,weight))
+        neighbour_matrix[node].append((neighbour, weight))
     node += 1
 print(mst(neighbour_matrix))

@@ -3,6 +3,7 @@
 from sys import stdin
 import queue
 
+
 class Node:
     def __init__(self):
         self.child = []
@@ -30,6 +31,7 @@ def dfs(root):
         node_stack += current_node.child
         # incase of no children just pop
 
+
 def tweak(ratatosk_node):
     current_node = ratatosk_node
     depth = 0
@@ -55,6 +57,7 @@ def bfs(root):
         for child in current_node.child:
             child.depth = current_node.depth + 1
             node_queue.put(child)
+
 
 function = stdin.readline().strip()
 number_of_nodes = int(stdin.readline())

@@ -1,6 +1,8 @@
 from sys import stdin, stderr
+
+
 def best_path(nm, prob):
-    path_list = len(nm)*[-1]
+    path_list = len(nm) * [-1]
     path_list[0] = prob[0]
     visited_nodes = [0]
     current_node = nm[0]
@@ -11,15 +13,18 @@ def best_path(nm, prob):
         for x in range(len(current_node)):
             if current_node[x]:
                 if x not in visited_nodes:
-                    if path_list[nm.index(current_node)]*prob[x] > path_list[x] or path_list[x] == -1:
-                        path_list[x] = path_list[key]*prob[x]
+                    if (
+                        path_list[nm.index(current_node)] * prob[x] > path_list[x]
+                        or path_list[x] == -1
+                    ):
+                        path_list[x] = path_list[key] * prob[x]
         max_prob = -1
         if len(visited_nodes) == len(nm):
             return visited_nodes
         while not max_node:
             i = 0
             for y in path_list:
-                #print("here is y: " + str(y) + " and here is max: " + str(max_prob))
+                # print("here is y: " + str(y) + " and here is max: " + str(max_prob))
                 if not i in visited_nodes:
                     if y > max_prob:
                         max_prob = y
@@ -30,9 +35,10 @@ def best_path(nm, prob):
         current_node = nm[key]
         visited_nodes.append(key)
         output += "-" + str(key)
-        if (len(nm)-1) in visited_nodes:
+        if (len(nm) - 1) in visited_nodes:
             return output
     return True
+
 
 n = int(stdin.readline())
 probabilities = [float(x) for x in stdin.readline().split()]

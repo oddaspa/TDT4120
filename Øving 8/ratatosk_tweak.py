@@ -11,6 +11,7 @@ def tweak(ratatosk_node):
         depth += 1
     return depth
 
+
 function = stdin.readline().strip()
 number_of_nodes = int(stdin.readline())
 
@@ -32,7 +33,3 @@ for line in stdin:
 
 
 print(tweak(info))
-
-
-
-

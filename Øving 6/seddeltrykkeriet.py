@@ -23,15 +23,19 @@ def max_value(widths, heights, values, paper_width, paper_height):
 
         # we want to override the value of a certain size if the value is greater than the current
         try:
-            if bills[width,height] < values[i]:
-                bills[width,height] = values[i]
-                bills[height,width] = values[i]
+            if bills[width, height] < values[i]:
+                bills[width, height] = values[i]
+                bills[height, width] = values[i]
         except:
-            bills[width,height] = values[i]
-            bills[height,width] = values[i]
+            bills[width, height] = values[i]
+            bills[height, width] = values[i]
 
     # error check in for area size
-    bills = dict(((key1,key2), value) for (key1,key2), value in bills.items() if key1*key2 <= paper_height*paper_width)
+    bills = dict(
+        ((key1, key2), value)
+        for (key1, key2), value in bills.items()
+        if key1 * key2 <= paper_height * paper_width
+    )
     if bills == {}:
         return 0
 
@@ -39,8 +43,8 @@ def max_value(widths, heights, values, paper_width, paper_height):
     res = {}
     for w in range(paper_width + 1):
         for h in range(paper_height + 1):
-            if (w,h) in bills:
-                best = bills[w,h]
+            if (w, h) in bills:
+                best = bills[w, h]
                 if best == 0:
                     continue
             else:
@@ -57,7 +61,7 @@ def max_value(widths, heights, values, paper_width, paper_height):
             for cutHeight in range(1, h):
                 b3 = 0
                 b4 = 0
-                if (w,cutHeight) in bills:
+                if (w, cutHeight) in bills:
                     b3 = bills[w, cutHeight]
                 if (w, h - cutHeight) in bills:
                     b4 = bills[w, h - cutHeight]
@@ -72,8 +76,8 @@ def main():
     heights = []
     values = []
     for triple in stdin.readline().split():
-        dim_value = triple.split(':', 1)
-        dim = dim_value[0].split('x', 1)
+        dim_value = triple.split(":", 1)
+        dim = dim_value[0].split("x", 1)
         width = int(dim[0][1:])
         height = int(dim[1][:-1])
         value = int(dim_value[1])
@@ -81,7 +85,7 @@ def main():
         heights.append(int(height))
         values.append(int(value))
     for line in stdin:
-        paper_width, paper_height = [int(x) for x in line.split('x', 1)]
+        paper_width, paper_height = [int(x) for x in line.split("x", 1)]
         print((max_value(widths, heights, values, paper_width, paper_height)))
 
 
