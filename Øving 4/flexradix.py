@@ -3,10 +3,8 @@
 from sys import stdin
 
 
-
 def flexradix(A, d):
     # Returns the list A sorted.
-
     # creates a new list of the words sorted after length
     list3 = sort_length(A)
     return counting_sort(list3, d)
@@ -23,23 +21,21 @@ def counting_sort(A, d):
         list[i - 1] = list[i - 1] + list[i]
 
     for i in range(d, -1, -1):
-        F = A[len(A) - list[i - 1] :]
+        F = A[len(A) - list[i - 1]:]
         B = [0] * len(F)
         C = [0] * 26
         for j in range(len(F)):
-
             index = ord(F[j][i - 1]) - 97
 
             C[index] = C[index] + 1
         for j in range(1, 26):
             C[j] = C[j] + C[j - 1]
         for j in range(len(F) - 1, -1, -1):
-
             index = ord(F[j][i - 1]) - 97
             B[C[index] - 1] = F[j]
             C[index] = C[index] - 1
 
-        A[len(A) - list[i - 1] :] = B
+        A[len(A) - list[i - 1]:] = B
     return A
 
 

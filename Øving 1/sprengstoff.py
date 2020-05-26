@@ -12,7 +12,7 @@ class Record:
 
 def search(record):
     max = -1
-    while record != None:
+    while record is not None:
         if record.value > max:
             max = record.value
         record = record.next
@@ -26,7 +26,7 @@ def main():
     for line in stdin:
         penultimate = last
         last = Record(int(line))
-        if first is not None:
+        if first is None:
             first = last
         else:
             penultimate.next = last
