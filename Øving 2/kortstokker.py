@@ -10,6 +10,7 @@ def merge(decks):
         R = decks[1::2]
 
         lowestPile = decks[0]
+        lowestNumber = 0
         for pile in decks:
             if pile[0][0]<lowestNumber:
                 lowestNumber = pile[0][0]
