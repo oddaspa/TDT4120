@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 from sys import stdin
-#import queue
+import queue
 
 class Node:
     def __init__(self):
